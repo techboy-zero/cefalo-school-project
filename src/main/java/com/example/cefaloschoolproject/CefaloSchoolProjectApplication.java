@@ -1,5 +1,6 @@
 package com.example.cefaloschoolproject;
 
+import com.example.cefaloschoolproject.commands.ICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,14 +15,15 @@ public class CefaloSchoolProjectApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(CefaloSchoolProjectApplication.class, args);
     }
-
+    @Autowired
+    CommandDefinitions commandDefinitions;
     @Autowired
     private CommandLineHelper commandLineHelper;
     @Autowired
     private CommandDispatcher commandDispatcher;
     @Override
     public void run(String... args) throws Exception {
-        commandLineHelper.defineOptions();
+        commandDefinitions.defineOptions();
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {

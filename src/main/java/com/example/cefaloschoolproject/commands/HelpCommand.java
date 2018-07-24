@@ -1,4 +1,4 @@
-package com.example.cefaloschoolproject;
+package com.example.cefaloschoolproject.commands;
 
 public class HelpCommand implements ICommand{
 
