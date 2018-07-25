@@ -1,8 +1,9 @@
 # cefalo-school-project
 # Commands 
 -insert=cat,cab,cow,cool
+-remove=cat
 -count=*
 -count=ca
 -contains cat
--prefix=ca
--prefix=ca 10
+-word=ca
+-word=ca 10

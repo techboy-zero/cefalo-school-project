@@ -17,6 +17,12 @@ public class CommandDefinitions {
         addCountCommand();
         addContainsCommand();
         addPrefixCommand();
+        addRemoveCommand();
+    }
+
+    private void addRemoveCommand() {
+        Option option = new Option("remove", "remove",true, "Removes word from the dictionary");
+        options.addOption(option);
     }
 
     private void addPrefixCommand() {

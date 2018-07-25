@@ -1,14 +1,14 @@
 package com.example.cefaloschoolproject.commands;
 
-import com.example.cefaloschoolproject.commandHandlers.ContainsCommandHandler;
+import com.example.cefaloschoolproject.commandHandlers.RemoveCommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContainsCommand extends ICommand<ContainsCommandHandler>{
+public class RemoveCommand extends ICommand<RemoveCommandHandler>{
     private String word;
     @Autowired
-    public ContainsCommand(ContainsCommandHandler commandHandler) {
+    public RemoveCommand(RemoveCommandHandler commandHandler) {
         super(commandHandler);
     }
 

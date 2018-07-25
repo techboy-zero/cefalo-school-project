@@ -33,6 +33,13 @@ public class CommandFactory {
             command.setWords(Arrays.asList(insert.split(",")));
             return command;
         }
+        if(cmd.hasOption("remove")){
+            String remove = cmd.getOptionValue("remove");
+            System.out.println(remove);
+            RemoveCommand command = (RemoveCommand) applicationContext.getBean("removeCommand");
+            command.setWord(remove);
+            return command;
+        }
         if(cmd.hasOption("count")){
             CountCommand command = (CountCommand) applicationContext.getBean("countCommand");
             String prefix= cmd.getOptionValue("count");
@@ -43,8 +50,8 @@ public class CommandFactory {
         if(cmd.hasOption("contains")){
             ContainsCommand command = (ContainsCommand) applicationContext.getBean("containsCommand");
             String prefix= cmd.getOptionValue("contains");
-            command.setPrefix(prefix);
-            System.out.println(command.getPrefix());
+            command.setWord(prefix);
+            System.out.println(command.getWord());
             return command;
         }
         if(cmd.hasOption("prefix")){
