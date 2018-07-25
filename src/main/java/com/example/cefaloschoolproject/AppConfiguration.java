@@ -12,4 +12,9 @@ public class AppConfiguration {
     public CommandLineOptions options(){
         return new CommandLineOptions();
     }
+    @Bean
+    @Scope("singleton")
+    public IDictionary dictionary(){
+        return new TrieDictionary();
+    }
 }
