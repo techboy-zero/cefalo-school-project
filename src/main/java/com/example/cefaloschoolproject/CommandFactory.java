@@ -13,43 +13,42 @@ public class CommandFactory {
     @Autowired
     private ApplicationContext applicationContext;
     public ICommand buildCommand(CommandLine cmd){
-
-        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
-        for(String beanName : allBeanNames) {
-            System.out.println(beanName);
-        }
+//
+//        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
+//        for(String beanName : allBeanNames) {
+//            System.out.println(beanName);
+//        }
 
         if(cmd.hasOption("help")){
-            HelpCommand helpCommand = (HelpCommand) applicationContext.getBean("helpCommand");
-            return helpCommand;
+            return (HelpCommand) applicationContext.getBean("helpCommand");
         }
-        /*
+
         if(cmd.hasOption("exit")){
-            return new ExitCommand();
+            return (ExitCommand) applicationContext.getBean("exitCommand");
         }
         if(cmd.hasOption("insert")){
             String insert = cmd.getOptionValue("insert");
             System.out.println(insert);
-            InsertWordsCommand command = new InsertWordsCommand();
+            InsertWordsCommand command = (InsertWordsCommand) applicationContext.getBean("insertWordsCommand");
             command.setWords(Arrays.asList(insert.split(",")));
             return command;
         }
         if(cmd.hasOption("count")){
-            CountCommand command = new CountCommand();
+            CountCommand command = (CountCommand) applicationContext.getBean("countCommand");
             String prefix= cmd.getOptionValue("count");
             command.setPrefix(prefix);
             System.out.println(command.getPrefix());
             return command;
         }
         if(cmd.hasOption("contains")){
-            ContainsCommand command = new ContainsCommand();
+            ContainsCommand command = (ContainsCommand) applicationContext.getBean("containsCommand");
             String prefix= cmd.getOptionValue("contains");
             command.setPrefix(prefix);
             System.out.println(command.getPrefix());
             return command;
         }
         if(cmd.hasOption("prefix")){
-            PrefixCommand command = new PrefixCommand();
+            PrefixCommand command = (PrefixCommand) applicationContext.getBean("prefixCommand");
             String arg = cmd.getOptionValue("prefix");
             String[] split = arg.split(" ");
             String prefix = split[0];
@@ -62,13 +61,6 @@ public class CommandFactory {
             System.out.println(command.getPrefix() + " " + command.getCount());
             return command;
         }
-        */
-
-//        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
-//        for(String beanName : allBeanNames) {
-//            System.out.println(beanName);
-//        }
-
         throw new RuntimeException("Option not found");
     }
 }
