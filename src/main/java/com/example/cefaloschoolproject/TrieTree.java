@@ -1,15 +1,32 @@
 package com.example.cefaloschoolproject;
 
 
-import java.util.Dictionary;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class TrieTree {
+    private boolean isWord = false;
     private HashMap<Character,TrieTree> edges = new HashMap<>();
-    public TrieTree getNode(Character ch){
-        return this.edges.getOrDefault(ch,null);
+
+    public boolean isEndOfWord() {
+        return isWord;
     }
-    public void addNode(Character ch,TrieTree node){
-        this.edges.put(ch,node);
+
+    public void setEndOfWord(boolean isWord) {
+        this.isWord = isWord;
+    }
+
+    public TrieTree getNode(Character key){
+        return this.edges.getOrDefault(key,null);
+    }
+
+    public void addNode(Character key, TrieTree node){
+        this.edges.put(key, node);
+    }
+
+    public ArrayList<TrieTree> getChildren() {
+        Collection<TrieTree> nodes =  edges.values();
+        return new ArrayList<>(nodes);
     }
 }

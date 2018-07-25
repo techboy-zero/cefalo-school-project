@@ -3,7 +3,6 @@ package com.example.cefaloschoolproject;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @Component
 public class NativeDictionary implements IDictionary {
@@ -21,7 +20,9 @@ public class NativeDictionary implements IDictionary {
 
     @Override
     public int count(String prefix) {
-        if(prefix=="*")return this.words.size();
+        if(prefix.compareTo("*") == 0) {
+            return this.words.size();
+        }
         int result = 0;
         for(String s : this.words){
             if(s.startsWith(prefix))result++;
