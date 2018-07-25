@@ -2,16 +2,28 @@ package com.example.cefaloschoolproject;
 
 import com.example.cefaloschoolproject.commands.*;
 import org.apache.commons.cli.CommandLine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Component
 public class CommandFactory {
+    @Autowired
+    private ApplicationContext applicationContext;
     public ICommand buildCommand(CommandLine cmd){
-        if(cmd.hasOption("help")){
-            return new HelpCommand();
+
+        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName);
         }
+
+        if(cmd.hasOption("help")){
+            HelpCommand helpCommand = (HelpCommand) applicationContext.getBean("helpCommand");
+            return helpCommand;
+        }
+        /*
         if(cmd.hasOption("exit")){
             return new ExitCommand();
         }
@@ -50,6 +62,12 @@ public class CommandFactory {
             System.out.println(command.getPrefix() + " " + command.getCount());
             return command;
         }
+        */
+
+//        String[] allBeanNames = applicationContext.getBeanDefinitionNames();
+//        for(String beanName : allBeanNames) {
+//            System.out.println(beanName);
+//        }
 
         throw new RuntimeException("Option not found");
     }

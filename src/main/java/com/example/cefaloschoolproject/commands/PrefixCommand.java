@@ -1,8 +1,17 @@
 package com.example.cefaloschoolproject.commands;
 
-public class PrefixCommand implements ICommand{
+import com.example.cefaloschoolproject.commandHandlers.PrefixCommandHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PrefixCommand extends ICommand<PrefixCommandHandler> {
     private String prefix;
     private int count;
+    @Autowired
+    public PrefixCommand(PrefixCommandHandler commandHandler) {
+        super(commandHandler);
+    }
 
     public String getPrefix() {
         return prefix;

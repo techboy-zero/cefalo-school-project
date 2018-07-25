@@ -19,8 +19,7 @@ public class CefaloSchoolProjectApplication implements CommandLineRunner {
     CommandDefinitions commandDefinitions;
     @Autowired
     private CommandLineHelper commandLineHelper;
-    @Autowired
-    private CommandDispatcher commandDispatcher;
+
     @Override
     public void run(String... args) throws Exception {
         commandDefinitions.defineOptions();
@@ -29,7 +28,7 @@ public class CefaloSchoolProjectApplication implements CommandLineRunner {
             try {
                 String line = sc.nextLine();
                 ICommand command = commandLineHelper.parse(line);
-                commandDispatcher.dispatch(command);
+                command.disPatch();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

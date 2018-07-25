@@ -1,8 +1,17 @@
 package com.example.cefaloschoolproject.commands;
 
-public class CountCommand implements ICommand{
+import com.example.cefaloschoolproject.commandHandlers.CountCommandHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CountCommand extends ICommand<CountCommandHandler>{
 
     private String prefix;
+    @Autowired
+    public CountCommand(CountCommandHandler commandHandler) {
+        super(commandHandler);
+    }
 
     public String getPrefix() {
         return prefix;
