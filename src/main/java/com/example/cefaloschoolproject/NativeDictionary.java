@@ -6,7 +6,7 @@ import java.util.*;
 
 @Component
 public class NativeDictionary implements IDictionary {
-    private Set<String > words = new HashSet<>();
+    private Set<String > words = new TreeSet<>();
 
     @Override
     public void insert(String word) {

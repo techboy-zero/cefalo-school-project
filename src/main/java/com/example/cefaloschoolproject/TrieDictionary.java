@@ -2,6 +2,7 @@ package com.example.cefaloschoolproject;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -88,6 +89,8 @@ public class TrieDictionary implements IDictionary {
 
     @Override
     public List<String> prefixSearch(String prefix, int count) {
-        return null;
+        List<String> strings = new ArrayList<>();
+        strings.add("cat");
+        return strings;
     }
 }
