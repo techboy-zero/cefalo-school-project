@@ -1,6 +1,5 @@
 package com.example.cefaloschoolproject;
 
-import org.apache.commons.cli.Options;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
