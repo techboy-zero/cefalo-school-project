@@ -1,5 +1,7 @@
 package com.example.cefaloschoolproject;
 
+import com.example.cefaloschoolproject.dictionary.NativeDictionary;
+
 import java.util.Arrays;
 import java.util.List;
 

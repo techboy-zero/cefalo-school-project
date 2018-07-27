@@ -1,4 +1,4 @@
-package com.example.cefaloschoolproject;
+package com.example.cefaloschoolproject.dictionary;
 
 
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class TrieTree {
     private boolean isWord = false;
+    private int descendantCount = 0;
     private HashMap<Character,TrieTree> edges = new HashMap<>();
 
     public boolean isEndOfWord() {
@@ -25,8 +26,26 @@ public class TrieTree {
         this.edges.put(key, node);
     }
 
+    public void deleteNode(Character key) {
+        this.edges.remove(key);
+    }
+
     public ArrayList<TrieTree> getChildren() {
         Collection<TrieTree> nodes =  edges.values();
         return new ArrayList<>(nodes);
+    }
+
+    public int getDescendantCount() {
+      return this.descendantCount;
+    }
+
+    public void incDescendantCount() {
+        this.descendantCount++;
+    }
+
+    public void decDescendantCount() {
+        if (this.descendantCount > 0) {
+            this.descendantCount--;
+        }
     }
 }
