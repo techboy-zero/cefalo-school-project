@@ -1,9 +1,7 @@
 package com.example.cefaloschoolproject.dictionary;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 public class TrieTree {
     private boolean isWord = false;
@@ -30,9 +28,11 @@ public class TrieTree {
         this.edges.remove(key);
     }
 
-    public ArrayList<TrieTree> getChildren() {
-        Collection<TrieTree> nodes =  edges.values();
-        return new ArrayList<>(nodes);
+    public ArrayList<Character> getChildrenKeys() {
+        Collection<Character> keys = edges.keySet();
+        ArrayList<Character> keyList = new ArrayList<>(keys);
+        Collections.sort(keyList);
+        return keyList;
     }
 
     public int getDescendantCount() {

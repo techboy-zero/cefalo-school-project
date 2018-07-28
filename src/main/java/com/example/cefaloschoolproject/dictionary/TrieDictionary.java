@@ -1,13 +1,13 @@
 package com.example.cefaloschoolproject.dictionary;
 
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class TrieDictionary implements IDictionary {
     private TrieTree root = new TrieTree();
+    private int backtrackCounter = 0;
 
     @Override
     public void insert(String word) {
@@ -95,8 +95,38 @@ public class TrieDictionary implements IDictionary {
 
     @Override
     public List<String> prefixSearch(String prefix, int count) {
-        List<String> strings = new ArrayList<>();
-        strings.add("cat");
-        return strings;
+        int prefixLength = prefix.length();
+        TrieTree currentTree = root;
+        for (int index = 0; index < prefixLength; index++) {
+            char key = prefix.charAt(index);
+            currentTree = currentTree.getNode(key);
+            if (currentTree == null) {
+                return new ArrayList<>();
+            }
+        }
+        backtrackCounter = count;
+        return this.backtrackSearch(prefix, currentTree);
+    }
+
+    private ArrayList<String> backtrackSearch(String word, TrieTree node) {
+        ArrayList<String> result = new ArrayList<>();
+        if (node.isEndOfWord()) {
+            backtrackCounter--;
+            result.add(word);
+        }
+        if (backtrackCounter > 0) {
+            ArrayList<Character> childrenKeys = node.getChildrenKeys();
+            int keysLength = childrenKeys.size();
+            for (int i = 0; i < keysLength; i++) {
+                char key = childrenKeys.get(i);
+                ArrayList<String> backtrackResult = this.backtrackSearch(word + key, node.getNode
+                    (key));
+                result.addAll(backtrackResult);
+                if (backtrackCounter == 0) {
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }
