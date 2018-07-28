@@ -1,14 +1,15 @@
 package com.example.cefaloschoolproject;
-import java.util.ArrayList;
+import com.example.cefaloschoolproject.dictionary.TrieDictionary;
+
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 class TrieDictionaryTest {
 
     @org.junit.jupiter.api.Test
     void insertWorksWell() {
-        TrieDictionary trieDictionary =trieDictionary = new TrieDictionary();;
+        TrieDictionary trieDictionary = new TrieDictionary();;
         String[] words =  new String[]{"cat", "can", "cow", "coward", "city", "cab"};
         for(String s : words) trieDictionary.insert(s);
     }

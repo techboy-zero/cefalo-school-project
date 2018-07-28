@@ -1,6 +1,6 @@
 package com.example.cefaloschoolproject.commandHandlers;
 
-import com.example.cefaloschoolproject.IDictionary;
+import com.example.cefaloschoolproject.dictionary.IDictionary;
 import com.example.cefaloschoolproject.commands.ContainsCommand;
 import com.example.cefaloschoolproject.commands.ICommand;
 import org.springframework.beans.factory.annotation.Autowired;

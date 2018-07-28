@@ -1,4 +1,4 @@
-package com.example.cefaloschoolproject;
+package com.example.cefaloschoolproject.dictionary;
 
 import java.util.List;
 
