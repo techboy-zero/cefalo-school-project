@@ -1,8 +1,8 @@
 # cefalo-school-project
 
 # How to run 
-./gradlew build
-java -jar build/libs/cefalo-school-project-0.0.1-SNAPSHOT.jar 
+- ./gradlew build
+- java -jar build/libs/cefalo-school-project-0.0.1-SNAPSHOT.jar 
 
 # Commands
 -help
