@@ -1,13 +1,14 @@
 package com.example.cefaloschoolproject.dictionary;
-
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 @Component
 public class TrieDictionary implements IDictionary {
     private TrieTree root = new TrieTree();
-    private int backtrackCounter = 0;
 
     @Override
     public void insert(String word) {
@@ -50,10 +51,14 @@ public class TrieDictionary implements IDictionary {
 
     private void cleanUp(String word, ArrayList<TrieTree> path) {
         int pathLength = path.size();
-        for (int index = pathLength - 1; index >= 0; index--) {
+        for (int index = pathLength - 1; index >= 1; index--) {
             TrieTree node = path.get(index);
             if (node.getDescendantCount() > 0) {
                 return;
+            }
+
+            if (index == 0) {
+
             }
             char key = word.charAt(index - 1);
             TrieTree parentNode = path.get(index - 1);
@@ -104,26 +109,44 @@ public class TrieDictionary implements IDictionary {
                 return new ArrayList<>();
             }
         }
-        backtrackCounter = count;
-        return this.backtrackSearch(prefix, currentTree);
+        return this.getFirstNMatches(prefix, currentTree, count);
     }
 
-    private ArrayList<String> backtrackSearch(String word, TrieTree node) {
+    private ArrayList<String> getFirstNMatches(
+        String prefix, TrieTree node,
+        int count
+    ) {
+        Deque<Pair<String, TrieTree>> store = new ArrayDeque<>();
         ArrayList<String> result = new ArrayList<>();
-        if (node.isEndOfWord()) {
-            backtrackCounter--;
-            result.add(word);
-        }
-        if (backtrackCounter > 0) {
-            ArrayList<Character> childrenKeys = node.getChildrenKeys();
-            int keysLength = childrenKeys.size();
-            for (int i = 0; i < keysLength; i++) {
-                char key = childrenKeys.get(i);
-                ArrayList<String> backtrackResult = this.backtrackSearch(word + key, node.getNode
-                    (key));
-                result.addAll(backtrackResult);
-                if (backtrackCounter == 0) {
-                    break;
+
+        if (count > 0) {
+            store.addFirst(new Pair<>(prefix, node));
+            while (!store.isEmpty()) {
+                Pair<String, TrieTree> currentItem = store.removeFirst();
+                String currentPrefix = currentItem.getFirst();
+                TrieTree currentNode = currentItem.getSecond();
+
+                if (currentNode.isEndOfWord()) {
+                    count--;
+                    result.add(currentPrefix);
+                }
+
+                if (count > 0) {
+                    List<Character> keyList = currentNode.getChildrenKeys();
+                    int keyListLength = keyList.size();
+
+                    for (int i = keyListLength - 1; i >= 0; i--) {
+                        char key = keyList.get(i);
+                        String newPrefix = currentPrefix + key;
+                        TrieTree newNode = currentNode.getNode(key);
+                        store.addFirst(new Pair<>(newPrefix, newNode));
+                    }
+                }
+
+                int storeSize = store.size();
+                while(storeSize > count) {
+                    store.removeLast();
+                    storeSize--;
                 }
             }
         }
