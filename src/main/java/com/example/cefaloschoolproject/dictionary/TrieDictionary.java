@@ -51,10 +51,14 @@ public class TrieDictionary implements IDictionary {
 
     private void cleanUp(String word, ArrayList<TrieTree> path) {
         int pathLength = path.size();
-        for (int index = pathLength - 1; index >= 0; index--) {
+        for (int index = pathLength - 1; index >= 1; index--) {
             TrieTree node = path.get(index);
             if (node.getDescendantCount() > 0) {
                 return;
+            }
+
+            if (index == 0) {
+
             }
             char key = word.charAt(index - 1);
             TrieTree parentNode = path.get(index - 1);
